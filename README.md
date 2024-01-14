@@ -1,5 +1,5 @@
 # Ouroboros
 
 <p align="center">
-    <img width="100%" src="./assets/ouroboros.svg">
+    <img width="75%" src="./assets/ouroboros.svg">
 </p>

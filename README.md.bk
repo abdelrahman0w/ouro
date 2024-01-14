@@ -1,0 +1,84 @@
+# Ouroboros
+
+![Thndr](https://img.shields.io/badge/Thndr-FFFF00?style=for-the-badge&logo=thndr&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+
+- [thndr-oncall](#thndr-oncall)
+- [Description](#description)
+- [Screenshots](#screenshots)
+- [Installation](#installation)
+- [Usage](#usage)
+	- [Entry Point](#entry-point)
+- [Features](#features)
+
+## Description
+
+`thndr-oncall` is a single interface to rule them all.
+
+It's a TUI app to help engineers during oncall weeks. Manage all oncall-related tasks from a single interface.
+
+## Screenshots
+
+![]()
+
+## Installation
+
+Once you have a copy of the source, you can install it with:
+
+```shell
+make install
+```
+
+Or directly from the `setup.py` file
+
+```shell
+python setup.py install
+```
+
+## Usage
+
+### Entry Point
+
+To use the app enter the following command in your terminal
+
+```shell
+thndr-oncall
+```
+
+## Features
+
+> Current features are checked
+
+- [ ] Manage Freshdesk Tickets
+	- [ ] View Your Resolved Tickets
+	- [ ] Manage Your Unresolved Tickets
+		- [ ] View Unresolved Tickets
+		- [ ] Resolve a Ticket
+	- [ ] Manage All Unresolved Tickets
+		- [ ] View All Unresolved Tickets
+		- [ ] Assign a Ticket to Yourself
+		- [ ] Resolve a Ticket
+- [ ] Datadog API Integration
+	- [ ] Search Logs
+- [ ] Braze API Integration
+	- [ ] Remove Bounces
+- [ ] Linear API Integration
+	- [ ] Create a Triage Issue
+- [ ] Stripe API Integration
+	- [ ] Get Customer Info
+	- [ ] Get Customer Cards and Payment Methods
+	- [ ] Get Customer Cards and Payment Methods IDs
+	- [ ] Delete Specific Customer Payment Method by Its ID
+	- [ ] Delete All Customer Cards and Payment Methods
+	- [ ] Delete All Cards for All Users in a Given File
+- [ ] Access to Thndr Admin Endpoints
+	- [ ] Compliance
+	- [ ] Users
+	- [ ] Funding
+	- [ ] Market
+	- [ ] Document
+	- [ ] Payment
+- [ ] EGID API Integration
+- [ ] Sentry API Integration
+- [ ] Metabase API Integration
+- [ ] Spike API Integration

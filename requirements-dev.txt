@@ -1,0 +1,7 @@
+pip
+bump2version
+wheel
+flake8
+tox
+pytest
+black
