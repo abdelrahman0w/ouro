@@ -2,12 +2,17 @@ import os
 import re
 from typing import Generator
 from typing import List
+from typing import Union
 
 
 class Reader:
     _CHECKABLE: List[str] = [".py", ".pyi"]
 
-    def __init__(self, path: str, ignore: List[str] | None = None) -> None:
+    def __init__(
+        self,
+        path: str,
+        ignore: Union[List[str], None] = None,
+    ) -> None:
         self.path = path
         self.ignore = set(ignore) if ignore else set()
 
