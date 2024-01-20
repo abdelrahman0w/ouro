@@ -20,14 +20,14 @@ test_requirements = [
 setup(
     author="Abdelrahman Abdelkhalek",
     author_email="abdelrahman.abdelkhalek@thndr.app",
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
     ],
     description=description,
     install_requires=requirements,
