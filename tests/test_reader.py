@@ -3,7 +3,7 @@ from pathlib import Path
 from ouroboros.reader import Reader
 
 
-def test_reader(mock_gitignore):
+def test_reader(mock_git_dir, mock_gitignore):
     test_pkg_dir = Path(__file__).resolve().parent / "test_pkg"
 
     assert Path.exists(test_pkg_dir / ".gitignore")
