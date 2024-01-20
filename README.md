@@ -19,7 +19,7 @@
 
 ## Description
 
-OURO ([**OURO**boros](https://en.wikipedia.org/wiki/Ouroboros)) is a [Python](https://www.python.org/) library that checks your code for circular (cyclic) imports.
+OURO ([**OURO**boros](https://en.wikipedia.org/wiki/Ouroboros)) is a [Python](https://www.python.org/) package that checks your code for circular (cyclic) imports.
 
 > Currently, ouro only supports [absolute imports](https://docs.python.org/3/reference/import.html#package-relative-imports)
 
