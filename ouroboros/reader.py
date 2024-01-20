@@ -17,7 +17,7 @@ class Reader:
     ) -> None:
         self.path = path
         self._ignore = set(ignore) if ignore else set()
-        self._ignore.add(r"\.git(?=[^a-zA-Z0-9\s])")
+        self._ignore.add(r"\.git(?=[\/\\])")
 
     @property
     def _gitignore(self) -> Union[pathspec.PathSpec, None]:
