@@ -4,11 +4,29 @@
 [![tox](https://github.com/abdelrahman0w/ouro/actions/workflows/tox.yml/badge.svg)](https://github.com/abdelrahman0w/ouro/actions/workflows/tox.yml)
 [![pre-commit](https://github.com/abdelrahman0w/ouro/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/abdelrahman0w/ouro/actions/workflows/pre-commit.yml)
 
+- [Ouro](#ouro)
+  - [Description](#description)
+  - [Name Origin](#name-origin)
+  - [Demo](#demo)
+  - [Installation](#installation)
+    - [Using PIP](#using-pip)
+    - [Using Poetry](#using-poetry)
+    - [From Source](#from-source)
+  - [Usage](#usage)
+    - [Basic Usage](#basic-usage)
+    - [Available Options](#available-options)
+    - [As a pre-commit hook](#as-a-pre-commit-hook)
+  - [Features](#features)
+
 ## Description
 
 OURO ([**OURO**boros](https://en.wikipedia.org/wiki/Ouroboros)) is a [Python](https://www.python.org/) package that checks your code for circular (cyclic) imports.
 
 > Currently, ouro only supports [absolute imports](https://docs.python.org/3/reference/import.html#package-relative-imports)
+
+## Name Origin
+
+The name **"ouro"** is derived from the term [**"ouroboros"**](https://en.wikipedia.org/wiki/Ouroboros), a symbol from ancient mythology depicting a snake consuming its own tail, representing the concept of infinity and cyclicality. This name was chosen for its apt metaphorical representation of the package's functionality. Just as the ouroboros symbolizes a cycle, the "ouro" package checks for circular imports in Python. The connection to Python, a language named after a type of snake, further reinforces this symbolic link.
 
 ## Demo
 
@@ -33,10 +51,11 @@ poetry add ouro
 ### From Source
 
 1. Clone [this repo](https://github.com/abdelrahman0w/ouro)
-    
+
     ```shell
     git clone https://github.com/abdelrahman0w/ouro
     ```
+
     > Or you can download it as a zip file
 1. Naviage to the repo directory
 
@@ -44,23 +63,23 @@ poetry add ouro
     cd ouro
     ```
 
-1. Once you have a copy of the source, you can install it with:
+1. Once you have a copy of the source, you can install it as follows:
 
-- Using `make`
+    - Using `make`
 
-    ```shell
-    make install
-    ```
-- Using `pip`
+        ```shell
+        make install
+        ```
+    - Using `pip`
 
-    ```shell
-    pip install .
-    ```
-- Or directly from the `setup.py` file
+        ```shell
+        pip install .
+        ```
+    - Or directly from the `setup.py` file
 
-    ```shell
-    python setup.py install
-    ```
+        ```shell
+        python setup.py install
+        ```
 
 ## Usage
 
