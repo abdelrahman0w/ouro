@@ -4,6 +4,19 @@
 [![tox](https://github.com/abdelrahman0w/ouro/actions/workflows/tox.yml/badge.svg)](https://github.com/abdelrahman0w/ouro/actions/workflows/tox.yml)
 [![pre-commit](https://github.com/abdelrahman0w/ouro/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/abdelrahman0w/ouro/actions/workflows/pre-commit.yml)
 
+- [Ouro](#ouro)
+- [Description](#description)
+- [Demo](#demo)
+- [Installation](#installation)
+    - [Using PIP](using-pip)
+    - [Using Poetry](using-poetry)
+    - [From Source](from-source)
+- [Usage](#usage)
+    - [Basic Usage](basic-usage)
+    - [Available Options](available-options)
+    - [As a pre-commit hook](as-a-pre-commit-hook)
+- [Features](#features)
+
 ## Description
 
 OURO ([**OURO**boros](https://en.wikipedia.org/wiki/Ouroboros)) is a [Python](https://www.python.org/) library that checks your code for circular (cyclic) imports.
@@ -44,23 +57,23 @@ poetry add ouro
     cd ouro
     ```
 
-1. Once you have a copy of the source, you can install it with:
+1. Once you have a copy of the source, you can install it as follows:
 
-- Using `make`
+    - Using `make`
 
-    ```shell
-    make install
-    ```
-- Using `pip`
+        ```shell
+        make install
+        ```
+    - Using `pip`
 
-    ```shell
-    pip install .
-    ```
-- Or directly from the `setup.py` file
+        ```shell
+        pip install .
+        ```
+    - Or directly from the `setup.py` file
 
-    ```shell
-    python setup.py install
-    ```
+        ```shell
+        python setup.py install
+        ```
 
 ## Usage
 
