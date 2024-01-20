@@ -55,10 +55,10 @@ clean-test: ## remove test and coverage artifacts
 	@rm -fr .pytest_cache
 
 lint/flake8: ## check style with flake8
-	@flake8 ouroboros tests
+	@flake8 ouro tests
 
 lint/black: ## check style with black
-	@black --check ouroboros tests
+	@black --check ouro tests
 
 lint: lint/flake8 lint/black ## check style
 
@@ -77,4 +77,4 @@ install: clean ## install the package to the active Python's site-packages
 	@python setup.py install
 
 uninstall: clean ## uninstall the package from the active Python's site-packages
-	@cd $(SITE_PACKAGES) && rm -rf ouroboros*
+	@cd $(SITE_PACKAGES) && rm -rf ouro*
