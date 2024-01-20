@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from ouroboros.reader import Reader
+from ouro.reader import Reader
 
 
 def test_reader(mock_git_dir, mock_gitignore):

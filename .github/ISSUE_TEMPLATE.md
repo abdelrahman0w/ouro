@@ -1,4 +1,4 @@
-- Ouroboros version:
+- Ouro version:
 - Python version:
 - Operating System:
 

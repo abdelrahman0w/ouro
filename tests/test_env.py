@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ouroboros import __version__
+from ouro import __version__
 
 
 def test_absolute_import():

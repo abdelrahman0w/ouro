@@ -35,7 +35,7 @@ setup(
     long_description=readme + "\n\n" + changelog,
     include_package_data=True,
     keywords=[
-        "ouroboros",
+        "ouro",
         "circular",
         "dependency",
         "cycle",
@@ -43,16 +43,16 @@ setup(
         "import",
         "imports",
     ],
-    name="ouroboros",
-    packages=find_packages(include=["ouroboros", "ouroboros.*"]),
+    name="ouro",
+    packages=find_packages(include=["ouro", "ouro.*"]),
     entry_points={
         "console_scripts": [
-            "ouroboros = ouroboros.__main__:main",
+            "ouro = ouro.__main__:main",
         ]
     },
     test_suite="tests",
     tests_require=test_requirements,
-    url="https://github.com/abdelrahman0w/ouroboros",
+    url="https://github.com/abdelrahman0w/ouro",
     version="0.1.0",
     zip_safe=False,
 )
