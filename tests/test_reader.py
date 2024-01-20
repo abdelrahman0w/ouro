@@ -1,17 +1,14 @@
-import os
+from pathlib import Path
 
 from ouroboros.reader import Reader
 
 
-def test_reader():
-    BASE_DIR = os.path.dirname(
-        os.path.dirname(os.path.abspath(__file__)),
-    )
+def test_reader(mock_gitignore):
+    test_pkg_dir = Path(__file__).resolve().parent / "test_pkg"
 
-    with Reader(
-        path=os.path.join(BASE_DIR, "tests", "test_pkg"),
-        ignore=["ignore*"],
-    ) as reader:
+    assert Path.exists(test_pkg_dir / ".gitignore")
+
+    with Reader(path=test_pkg_dir, ignore=["ignore*"]) as reader:
         files_lst, content_lst = zip(*reader)
 
     assert len(files_lst) == 4

@@ -4,6 +4,8 @@ from typing import Generator
 from typing import List
 from typing import Union
 
+import pathspec
+
 
 class Reader:
     _CHECKABLE: List[str] = [".py", ".pyi"]
@@ -14,10 +16,35 @@ class Reader:
         ignore: Union[List[str], None] = None,
     ) -> None:
         self.path = path
-        self.ignore = set(ignore) if ignore else set()
+        self._ignore = set(ignore) if ignore else set()
+
+    @property
+    def _gitignore(self) -> Union[pathspec.PathSpec, None]:
+        git_ignore = os.path.join(self.path, ".gitignore")
+
+        if os.path.exists(git_ignore):
+            with open(git_ignore, "r") as file:
+                gitignore_content = file.read().splitlines()
+                gitignore_content = [
+                    line
+                    for line in gitignore_content
+                    if not line.startswith("#") and line.strip()
+                ]
+
+            return pathspec.PathSpec.from_lines(
+                "gitwildmatch",
+                gitignore_content,
+            )
+
+        return None
 
     def _is_ignored(self, path: str) -> bool:
-        return any(re.search(ignored, path) for ignored in self.ignore)
+        if self._gitignore:
+            return bool(self._gitignore.check_file(path).include) or any(
+                re.search(ignored, path) for ignored in self._ignore
+            )
+        else:
+            return any(re.search(ignored, path) for ignored in self._ignore)
 
     def _is_checkable(self, file_name: str) -> bool:
         _, ext = os.path.splitext(file_name)
@@ -34,8 +61,9 @@ class Reader:
                 continue
 
             for file in files:
-                if self._is_checkable(file) and not self._is_ignored(file):
-                    yield os.path.join(dir, file)
+                file_path = os.path.join(dir, file)
+                if self._is_checkable(file_path) and not self._is_ignored(file_path):
+                    yield file_path
 
     @property
     def read(self) -> Generator:
