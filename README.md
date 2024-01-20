@@ -6,6 +6,7 @@
 
 - [Ouro](#ouro)
   - [Description](#description)
+  - [Name Origin](#name-origin)
   - [Demo](#demo)
   - [Installation](#installation)
     - [Using PIP](#using-pip)
@@ -22,6 +23,10 @@
 OURO ([**OURO**boros](https://en.wikipedia.org/wiki/Ouroboros)) is a [Python](https://www.python.org/) package that checks your code for circular (cyclic) imports.
 
 > Currently, ouro only supports [absolute imports](https://docs.python.org/3/reference/import.html#package-relative-imports)
+
+## Name Origin
+
+The name **"ouro"** is derived from the term [**"ouroboros"**](https://en.wikipedia.org/wiki/Ouroboros), a symbol from ancient mythology depicting a snake consuming its own tail, representing the concept of infinity and cyclicality. This name was chosen for its apt metaphorical representation of the package's functionality. Just as the ouroboros symbolizes a cycle, the "ouro" package checks for circular imports in Python. The connection to Python, a language named after a type of snake, further reinforces this symbolic link.
 
 ## Demo
 
