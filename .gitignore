@@ -134,3 +134,6 @@ local*
 # Temp directories and files
 tmp*
 temp*
+
+# include test files
+!tests/**/venv
