@@ -62,7 +62,9 @@ class Reader:
 
             for file in files:
                 file_path = os.path.join(dir, file)
-                if self._is_checkable(file_path) and not self._is_ignored(file_path):
+                if self._is_checkable(file_path) and not self._is_ignored(
+                    file_path
+                ):
                     yield file_path
 
     @property
