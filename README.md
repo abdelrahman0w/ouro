@@ -5,17 +5,17 @@
 [![pre-commit](https://github.com/abdelrahman0w/ouro/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/abdelrahman0w/ouro/actions/workflows/pre-commit.yml)
 
 - [Ouro](#ouro)
-- [Description](#description)
-- [Demo](#demo)
-- [Installation](#installation)
-    - [Using PIP](using-pip)
-    - [Using Poetry](using-poetry)
-    - [From Source](from-source)
-- [Usage](#usage)
-    - [Basic Usage](basic-usage)
-    - [Available Options](available-options)
-    - [As a pre-commit hook](as-a-pre-commit-hook)
-- [Features](#features)
+  - [Description](#description)
+  - [Demo](#demo)
+  - [Installation](#installation)
+    - [Using PIP](#using-pip)
+    - [Using Poetry](#using-poetry)
+    - [From Source](#from-source)
+  - [Usage](#usage)
+    - [Basic Usage](#basic-usage)
+    - [Available Options](#available-options)
+    - [As a pre-commit hook](#as-a-pre-commit-hook)
+  - [Features](#features)
 
 ## Description
 
@@ -46,10 +46,11 @@ poetry add ouro
 ### From Source
 
 1. Clone [this repo](https://github.com/abdelrahman0w/ouro)
-    
+
     ```shell
     git clone https://github.com/abdelrahman0w/ouro
     ```
+
     > Or you can download it as a zip file
 1. Naviage to the repo directory
 
