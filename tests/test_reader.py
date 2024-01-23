@@ -11,6 +11,6 @@ def test_reader(mock_git_dir, mock_gitignore):
     with Reader(path=test_pkg_dir, ignore=["ignore*"]) as reader:
         files_lst, content_lst = zip(*reader)
 
-    assert len(files_lst) == 4
-    assert len(content_lst) == 4
+    assert len(files_lst) == 6
+    assert len(content_lst) == 6
     assert "INVALID" not in " ".join(content_lst)
