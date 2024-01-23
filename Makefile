@@ -33,26 +33,29 @@ SITE_PACKAGES := $(shell python -c 'import site; print(site.getsitepackages()[0]
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
+clean: clean-build clean-pyc clean-test clear-my-py ## remove all build, test, coverage and Python artifacts
 
 clean-build: ## remove build artifacts
-	@rm -fr build/
-	@rm -fr dist/
-	@rm -fr .eggs/
-	@find . -name '*.egg-info' -exec rm -fr {} +
+	@rm -rf build/
+	@rm -rf dist/
+	@rm -rf .eggs/
+	@find . -name '*.egg-info' -exec rm -rf {} +
 	@find . -name '*.egg' -exec rm -f {} +
 
 clean-pyc: ## remove Python file artifacts
 	@find . -name '*.pyc' -exec rm -f {} +
 	@find . -name '*.pyo' -exec rm -f {} +
 	@find . -name '*~' -exec rm -f {} +
-	@find . -name '__pycache__' -exec rm -fr {} +
+	@find . -name '__pycache__' -exec rm -rf {} +
 
 clean-test: ## remove test and coverage artifacts
-	@rm -fr .tox/
+	@rm -rf .tox/
 	@rm -f .coverage
-	@rm -fr htmlcov/
-	@rm -fr .pytest_cache
+	@rm -rf htmlcov/
+	@rm -rf .pytest_cache
+
+clear-my-py: ## remove mypy cache
+	@find . -name '.mypy_cache' -exec rm -rf {} +
 
 lint/flake8: ## check style with flake8
 	@flake8 ouro tests
