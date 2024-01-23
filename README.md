@@ -117,11 +117,11 @@ TO BE ADDED
 
 ## Features
 
-- [ ] CLI tool for checking circular imports in a python code
-- [ ] Gets the context of the import to ignore imports within a function scope
-- [ ] Ignores `.git` dir in case of git repo
-- [ ] Ignores paths in `.gitignore` file
-- [ ] Ability to ignore a file name, directory name, or a regex pattern
-- [ ] Show imports in context with file name and line number
-- [ ] Supports for absolute imports
-- [ ] Supports for relative imports
+- [ ] CLI tool for checking circular imports in a Python code
+- [ ] Get the context of the import to ignore imports within a function scope
+- [X] Ignore `.git` dir in case of git repo
+- [X] Ignore paths and patterns in `.gitignore` file
+- [X] Ability to ignore a file name, directory name, or a regex pattern
+- [X] Show imports in context with file name and line number
+- [X] Support for absolute imports
+- [ ] Support for relative imports
