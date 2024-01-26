@@ -150,7 +150,7 @@ ouro [-h] [-v] [--verbose] [--no-categorize] [-e] [-i IGNORE [IGNORE ...]] [path
 - [X] Get the context of the import to ignore imports within a function scope
 - [X] Ignore `.git` dir in case of git repo
 - [X] Ignore paths and patterns in `.gitignore` file
-- [X] Ability to ignore a file name, directory name, or a regex pattern
+- [X] Ability to ignore a file name, directory name, or a glob pattern
 - [X] Show imports in context with file name and line number
 - [X] Support for absolute imports
 - [ ] Support for relative imports
