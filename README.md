@@ -3,7 +3,7 @@
 <p align="center">
     <img
         width="5%"
-        src="https://raw.githubusercontent.com/abdelrahman0w/ouro/main/assetss/ouro-icon.svg"
+        src="https://raw.githubusercontent.com/abdelrahman0w/ouro/main/assets/ouro-icon.svg"
     />
 </p>
 
@@ -40,7 +40,7 @@ The name **"ouro"** is derived from the term [**"ouroboros"**](https://en.wikipe
 
 ## Demo
 
-![OURO](https://raw.githubusercontent.com/abdelrahman0w/ouro/main/assetss/ouro-demo.gif)
+![OURO](https://raw.githubusercontent.com/abdelrahman0w/ouro/main/assets/ouro-demo.gif)
 
 ## Installation
 
