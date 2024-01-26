@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-"""The setup script."""
 from setuptools import find_packages
 from setuptools import setup
+
 
 with open("README.md") as readme_file:
     readme = readme_file.read()
@@ -9,13 +9,22 @@ with open("README.md") as readme_file:
 with open("CHANGELOG.md") as changelog_file:
     changelog = changelog_file.read()
 
-description = """OUROBOROS"""
-
-requirements = []
+try:
+    with open("requirements.txt") as requirements_file:
+        requirements = requirements_file.read().splitlines()
+except FileNotFoundError:
+    requirements = []
 
 test_requirements = [
     "pytest>=3",
 ]
+
+
+description = """
+ouro is a Python package that checks your code
+for circular (cyclic) imports.
+"""
+
 
 setup(
     author="Abdelrahman Abdelkhalek",
