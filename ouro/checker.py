@@ -34,10 +34,7 @@ class Checker:
             self._cycles[node.name] = []
 
         in_def = any(
-            [
-                def_begin <= lineno <= def_end
-                for def_begin, def_end in node.defs
-            ]
+            def_begin <= lineno <= def_end for def_begin, def_end in node.defs
         )
         path_from_import_to_file = [node.name for node in path]
 
@@ -69,10 +66,7 @@ class Checker:
             }
 
         in_def = any(
-            [
-                def_begin <= lineno <= def_end
-                for def_begin, def_end in node.defs
-            ]
+            def_begin <= lineno <= def_end for def_begin, def_end in node.defs
         )
         path_from_import_to_file = [node.name for node in path]
         categories_map = {

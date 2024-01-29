@@ -90,7 +90,7 @@ def main():
         )
 
         for possible_origin in possible_origins:
-            logger.info(f" ==> {possible_origin}")
+            logger.warn(f" ==> {possible_origin}")
 
         if args.verbose:
             logger.info("PRINTING REPORT TO CONSOLE")

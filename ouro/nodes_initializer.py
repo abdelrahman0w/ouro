@@ -43,7 +43,7 @@ class NodesInitializer:
         return [
             node
             for node in ast.walk(ast.parse(content))
-            if isinstance(node, ast.Import) or isinstance(node, ast.ImportFrom)
+            if isinstance(node, (ast.Import, ast.ImportFrom))
         ]
 
     def _get_defs(
@@ -52,9 +52,14 @@ class NodesInitializer:
         return [
             node
             for node in ast.walk(ast.parse(content))
-            if isinstance(node, ast.FunctionDef)
-            or isinstance(node, ast.AsyncFunctionDef)
-            or isinstance(node, ast.ClassDef)
+            if isinstance(
+                node,
+                (
+                    ast.FunctionDef,
+                    ast.AsyncFunctionDef,
+                    ast.ClassDef,
+                ),
+            )
         ]
 
     def _get_module_path(
