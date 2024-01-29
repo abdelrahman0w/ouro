@@ -84,6 +84,8 @@ def main():
     possible_origins = checker.get_possible_origins(cycles)
 
     if cycles:
+        retv = 1
+
         logger.fail("FOUND CIRCULAR IMPORT(S)!", highlight=True)
         logger.warn(
             "PROBABLY ONE OF THE FOLLOWING IS THE ORIGIN", highlight=True
@@ -109,12 +111,16 @@ def main():
                 f"REPORT EXPORTED TO: {export_path}", highlight=True
             )
     else:
+        retv = 0
+
         logger.success("WHOA! NO CIRCULAR IMPORT(S) FOUND!", highlight=True)
 
     logger.info(
         f"ELAPSED TIME: {time() - start_time:.2f} seconds", highlight=True
     )
 
+    return retv
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
