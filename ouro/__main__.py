@@ -65,8 +65,6 @@ def main():
     args = parse()
     start_time = time()
 
-    print("\033[2J\033[1;1H", end="")
-
     logger.info("OURO IS STARTING...", highlight=True)
     logger.info("SCANNING FILES...", highlight=True)
 
@@ -81,10 +79,10 @@ def main():
         path=args.path, ignore=args.ignore, categorize=(not args.no_categorize)
     )
     cycles = checker.cycles
-    possible_origins = checker.get_possible_origins(cycles)
 
     if cycles:
         retv = 1
+        possible_origins = checker.get_possible_origins(cycles)
 
         logger.fail("FOUND CIRCULAR IMPORT(S)!", highlight=True)
         logger.warn(
