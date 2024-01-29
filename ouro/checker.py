@@ -136,6 +136,7 @@ class Checker:
         paths = [
             cycle_info["path_from_import_to_file"] for cycle_info in cycle_iter
         ]
+        paths = [path for path_list in paths for path in path_list]
         if not paths:
             return []
 
@@ -149,10 +150,7 @@ class Checker:
 
         possible_origins = []
         for path in most_common_paths:
-            if path in cycles and any(
-                path in cycle_info["path_from_import_to_file"]
-                for cycle_info in cycle_iter
-            ):
+            if path in cycles:
                 possible_origins.append(path)
 
         return possible_origins
