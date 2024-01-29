@@ -53,20 +53,5 @@ class ImportsGraph:
         path_list.reverse()
         return path_list
 
-    def is_cyclic(
-        self, first_node: "Node", second_node: "Node"
-    ) -> Tuple[bool, List["Node"], List["Node"]]:
-        is_reachable_first_to_second, path_first_to_second = self.is_reachable(
-            first_node, second_node
-        )
-        is_reachable_second_to_first, path_second_to_first = self.is_reachable(
-            second_node, first_node
-        )
-
-        if is_reachable_first_to_second and is_reachable_second_to_first:
-            return True, path_first_to_second, path_second_to_first
-        else:
-            return False, [], []
-
     def __iter__(self):
         return iter(self.graph.items())

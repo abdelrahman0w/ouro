@@ -34,10 +34,7 @@ class Checker:
             self._cycles[node.name] = []
 
         in_def = any(
-            [
-                def_begin <= lineno <= def_end
-                for def_begin, def_end in node.defs
-            ]
+            def_begin <= lineno <= def_end for def_begin, def_end in node.defs
         )
         path_from_import_to_file = [node.name for node in path]
 
@@ -69,10 +66,7 @@ class Checker:
             }
 
         in_def = any(
-            [
-                def_begin <= lineno <= def_end
-                for def_begin, def_end in node.defs
-            ]
+            def_begin <= lineno <= def_end for def_begin, def_end in node.defs
         )
         path_from_import_to_file = [node.name for node in path]
         categories_map = {
@@ -127,18 +121,21 @@ class Checker:
     def get_possible_origins(
         self, cycles: Dict, num_possibilities: int = 3
     ) -> List[str]:
-        paths = []
-
         if self.categorize:
-            for cycle in cycles.values():
-                for category in cycle.values():
-                    for cycle_info in category:
-                        paths.extend(cycle_info["path_from_import_to_file"])
+            cycle_iter = (
+                cycle_info
+                for cycle in cycles.values()
+                for category in cycle.values()
+                for cycle_info in category
+            )
         else:
-            for cycle in cycles.values():
-                for cycle_info in cycle:
-                    paths.extend(cycle_info["path_from_import_to_file"])
+            cycle_iter = (
+                cycle_info for cycle in cycles.values() for cycle_info in cycle
+            )
 
+        paths = [
+            cycle_info["path_from_import_to_file"] for cycle_info in cycle_iter
+        ]
         if not paths:
             return []
 
@@ -152,20 +149,10 @@ class Checker:
 
         possible_origins = []
         for path in most_common_paths:
-            if self.categorize:
-                if path in cycles and any(
-                    path in cycle_info["path_from_import_to_file"]
-                    for cycle in cycles.values()
-                    for category in cycle.values()
-                    for cycle_info in category
-                ):
-                    possible_origins.append(path)
-            else:
-                if path in cycles and any(
-                    path in cycle_info["path_from_import_to_file"]
-                    for cycle in cycles.values()
-                    for cycle_info in cycle
-                ):
-                    possible_origins.append(path)
+            if path in cycles and any(
+                path in cycle_info["path_from_import_to_file"]
+                for cycle_info in cycle_iter
+            ):
+                possible_origins.append(path)
 
         return possible_origins
