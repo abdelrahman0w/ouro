@@ -42,6 +42,7 @@ setup(
     install_requires=requirements,
     license="MIT license",
     long_description=readme + "\n\n" + changelog,
+    long_description_content_type="text/markdown",
     include_package_data=True,
     keywords=[
         "ouro",
@@ -62,6 +63,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/abdelrahman0w/ouro",
-    version="0.1.1",
+    version="0.1.2",
     zip_safe=False,
 )

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.2 (2024-01-31)
+
+### Features
+
+### Fixed
+
+- bug fixes
+
+### Changed
+
+### Removed
+
 ## 0.1.1 (2024-01-29)
 
 ### Features
