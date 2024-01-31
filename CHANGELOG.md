@@ -1,29 +1,23 @@
 # Changelog
 
-## 0.1.2 (2024-01-31)
+## 0.1.3 (2024-01-31)
 
-### Features
+### Fixed
+
+- add missing instsll requirements
+
+## 0.1.2 (2024-01-31)
 
 ### Fixed
 
 - bug fixes
 
-### Changed
-
-### Removed
-
 ## 0.1.1 (2024-01-29)
-
-### Features
 
 ### Fixed
 
 - pre-commit hook
 - bug in possible origins func
-
-### Changed
-
-### Removed
 
 ## 0.1.0 (2024-01-27)
 
@@ -35,9 +29,3 @@
 - Ignores `.git` dir in case of git repo
 - Ignores paths in `.gitignore` file
 - Ability to ignore a file name, directory name, or a glob pattern
-
-### Fixed
-
-### Changed
-
-### Removed

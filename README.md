@@ -12,8 +12,8 @@
 ![license](https://img.shields.io/github/license/abdelrahman0w/ouro)
 [![tox](https://github.com/abdelrahman0w/ouro/actions/workflows/tox.yml/badge.svg)](https://github.com/abdelrahman0w/ouro/actions/workflows/tox.yml)
 [![pre-commit](https://github.com/abdelrahman0w/ouro/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/abdelrahman0w/ouro/actions/workflows/pre-commit.yml)
-![pypi-version](https://img.shields.io/pypi/v/ejustian-cli)
-![pypi-downloads](https://img.shields.io/pypi/dm/ejustian-cli)
+![pypi-version](https://img.shields.io/pypi/v/ouro)
+![pypi-downloads](https://img.shields.io/pypi/dm/ouro)
 
 - [Ouro](#ouro)
   - [Description](#description)
@@ -140,7 +140,7 @@ ouro [-h] [-v] [--verbose] [--no-categorize] [-e] [-i IGNORE [IGNORE ...]] [path
 
     ```yaml
     - repo: https://github.com/abdelrahman0w/ouro
-        rev: v0.1.2
+        rev: v0.1.3
         hooks:
         - id: ouro
     ```
