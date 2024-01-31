@@ -9,20 +9,16 @@ with open("README.md") as readme_file:
 with open("CHANGELOG.md") as changelog_file:
     changelog = changelog_file.read()
 
-try:
-    with open("requirements.txt") as requirements_file:
-        requirements = requirements_file.read().splitlines()
-except FileNotFoundError:
-    requirements = []
-
+requirements = [
+    "pathspec>=0.12.1",
+]
 test_requirements = [
     "pytest>=3",
 ]
 
 
 description = """
-ouro is a Python package that checks your code
-for circular (cyclic) imports.
+ouro is a Python package that checks your code for circular (cyclic) imports.
 """
 
 
@@ -31,7 +27,7 @@ setup(
     author_email="abdelrahman.abdelkhalek@thndr.app",
     python_requires=">=3.8",
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
@@ -45,6 +41,7 @@ setup(
     long_description_content_type="text/markdown",
     include_package_data=True,
     keywords=[
+        "python",
         "ouro",
         "circular",
         "dependency",
@@ -63,6 +60,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/abdelrahman0w/ouro",
-    version="0.1.2",
+    version="0.1.3",
     zip_safe=False,
 )
