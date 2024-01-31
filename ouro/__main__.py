@@ -78,16 +78,12 @@ def main():
     checker = Checker(
         path=args.path, ignore=args.ignore, categorize=(not args.no_categorize)
     )
-    cycles = checker.cycles
-
-    if cycles:
+    if cycles := checker.cycles:
         retv = 1
         possible_origins = checker.get_possible_origins(cycles)
 
         logger.fail("FOUND CIRCULAR IMPORT(S)!", highlight=True)
-        logger.warn(
-            "PROBABLY ONE OF THE FOLLOWING IS THE ORIGIN", highlight=True
-        )
+        logger.warn("PROBABLY ONE OF THE FOLLOWING IS THE ORIGIN", highlight=True)
 
         for possible_origin in possible_origins:
             logger.warn(f" ==> {possible_origin}")
@@ -100,22 +96,16 @@ def main():
             export_path = os.path.join(os.getcwd(), "ouro-report.json")
 
             with open("ouro-report.json", "w") as f:
-                logger.info(
-                    f"EXPORTING REPORT TO: {export_path}", highlight=True
-                )
+                logger.info(f"EXPORTING REPORT TO: {export_path}", highlight=True)
                 json.dump(cycles, f, indent=4)
 
-            logger.success(
-                f"REPORT EXPORTED TO: {export_path}", highlight=True
-            )
+            logger.success(f"REPORT EXPORTED TO: {export_path}", highlight=True)
     else:
         retv = 0
 
         logger.success("WHOA! NO CIRCULAR IMPORT(S) FOUND!", highlight=True)
 
-    logger.info(
-        f"ELAPSED TIME: {time() - start_time:.2f} seconds", highlight=True
-    )
+    logger.info(f"ELAPSED TIME: {time() - start_time:.2f} seconds", highlight=True)
 
     return retv
 

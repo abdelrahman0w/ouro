@@ -14,9 +14,7 @@ class Node:
         name: str,
     ) -> None:
         self.name = name
-        self.imports: List[
-            Tuple["Node", bool, int]
-        ] = []  # (node, is_from, lineno)
+        self.imports: List[Tuple["Node", bool, int]] = []  # (node, is_from, lineno)
         self.defs: List[Tuple[int, int]] = []
 
     def add(self, item: "Node", is_from: bool, lineno: int) -> None:
@@ -37,9 +35,7 @@ class NodesInitializer:
 
         return self.nodes[file]
 
-    def _get_imports(
-        self, content: str
-    ) -> List[Union[ast.Import, ast.ImportFrom]]:
+    def _get_imports(self, content: str) -> List[Union[ast.Import, ast.ImportFrom]]:
         return [
             node
             for node in ast.walk(ast.parse(content))
@@ -74,8 +70,7 @@ class NodesInitializer:
             ).with_suffix(".py")
             if not Path.exists(path):
                 path = Path(
-                    Path(self._prg_path).parent
-                    / Path(*(node.names[0].name.split(".")))
+                    Path(self._prg_path).parent / Path(*(node.names[0].name.split(".")))
                 ).with_suffix(".py")
 
             return (str(path), str(path))
@@ -88,8 +83,7 @@ class NodesInitializer:
             ).with_suffix(".py")
             if not Path.exists(path_1):
                 path_1 = Path(
-                    Path(self._prg_path).parent
-                    / Path(*(node.module.split(".")))
+                    Path(self._prg_path).parent / Path(*(node.module.split(".")))
                 ).with_suffix(".py")
 
             path_2 = Path(
@@ -112,16 +106,17 @@ class NodesInitializer:
         for file, content in self._prj:
             node = self._get_node(file)
             node.defs = [
-                (def_.lineno, def_.end_lineno)
-                if def_.end_lineno
-                else (def_.lineno, def_.lineno)
+                (
+                    (def_.lineno, def_.end_lineno)
+                    if def_.end_lineno
+                    else (def_.lineno, def_.lineno)
+                )
                 for def_ in self._get_defs(content)
             ]
 
             imports = self._get_imports(content)
             for import_ in imports:
-                imported_module_paths = self._get_module_path(import_)
-                if imported_module_paths:
+                if imported_module_paths := self._get_module_path(import_):
                     path_1, path_2 = imported_module_paths
                     imported_node_1 = self._get_node(path_1)
                     imported_node_2 = self._get_node(path_2)

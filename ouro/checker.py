@@ -33,9 +33,7 @@ class Checker:
         if not self._cycles.get(node.name):
             self._cycles[node.name] = []
 
-        in_def = any(
-            def_begin <= lineno <= def_end for def_begin, def_end in node.defs
-        )
+        in_def = any(def_begin <= lineno <= def_end for def_begin, def_end in node.defs)
         path_from_import_to_file = [node.name for node in path]
 
         self._cycles[node.name].append(
@@ -65,9 +63,7 @@ class Checker:
                 "direct_import_in_def": [],
             }
 
-        in_def = any(
-            def_begin <= lineno <= def_end for def_begin, def_end in node.defs
-        )
+        in_def = any(def_begin <= lineno <= def_end for def_begin, def_end in node.defs)
         path_from_import_to_file = [node.name for node in path]
         categories_map = {
             "critical": (is_from and not in_def),
@@ -93,9 +89,7 @@ class Checker:
         self, node: "Node", node_imports: List[Tuple["Node", bool, int]]
     ) -> None:
         for node_import, is_from, lineno in node_imports:
-            is_cyclic, path = self._imports_graph.is_reachable(
-                node_import, node
-            )
+            is_cyclic, path = self._imports_graph.is_reachable(node_import, node)
 
             if not is_cyclic:
                 continue
@@ -105,9 +99,7 @@ class Checker:
                     node, node_import, lineno, path, is_from
                 )
             else:
-                self._handle_node_cycle_only(
-                    node, node_import, lineno, path, is_from
-                )
+                self._handle_node_cycle_only(node, node_import, lineno, path, is_from)
 
     def _check_all(self):
         for node, node_imports in self._imports_graph:
@@ -133,9 +125,7 @@ class Checker:
                 cycle_info for cycle in cycles.values() for cycle_info in cycle
             )
 
-        paths = [
-            cycle_info["path_from_import_to_file"] for cycle_info in cycle_iter
-        ]
+        paths = [cycle_info["path_from_import_to_file"] for cycle_info in cycle_iter]
         paths = [path for path_list in paths for path in path_list]
         if not paths:
             return []
@@ -148,9 +138,4 @@ class Checker:
         most_common_paths = sorted_paths[:num_possibilities]
         most_common_paths.reverse()
 
-        possible_origins = []
-        for path in most_common_paths:
-            if path in cycles:
-                possible_origins.append(path)
-
-        return possible_origins
+        return [path for path in most_common_paths if path in cycles]
