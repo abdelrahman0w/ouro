@@ -4,7 +4,7 @@
 
 ### Features
 
-- Enhance performance by around %60
+- enhance performance by around %60
 
 ## 0.1.3 (2024-01-31)
 
