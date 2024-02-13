@@ -12,6 +12,7 @@
 ![license](https://img.shields.io/github/license/abdelrahman0w/ouro)
 [![tox](https://github.com/abdelrahman0w/ouro/actions/workflows/tox.yml/badge.svg)](https://github.com/abdelrahman0w/ouro/actions/workflows/tox.yml)
 [![pre-commit](https://github.com/abdelrahman0w/ouro/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/abdelrahman0w/ouro/actions/workflows/pre-commit.yml)
+[![code-quality](https://api.codacy.com/project/badge/Grade/fd020bb357f5462a8474bbd290410dc5)](https://app.codacy.com/gh/abdelrahman0w/ouro?utm_source=github.com&utm_medium=referral&utm_content=abdelrahman0w/ouro&utm_campaign=Badge_Grade)
 ![pypi-version](https://img.shields.io/pypi/v/ouro)
 ![pypi-downloads](https://img.shields.io/pypi/dm/ouro)
 
