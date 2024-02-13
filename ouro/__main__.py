@@ -1,6 +1,6 @@
 import argparse
 import json
-import os
+from pathlib import Path
 from time import time
 
 from ouro import __version__
@@ -21,7 +21,7 @@ def parse():
         "path",
         type=str,
         nargs="?",
-        default=os.getcwd(),
+        default=Path.cwd(),
         help=(
             "path to the Python project to be checked "
             + "(default: current working directory)"
@@ -93,11 +93,11 @@ def main():
             print(json.dumps(cycles, indent=4))
 
         if args.export:
-            export_path = os.path.join(os.getcwd(), "ouro-report.json")
+            export_path = Path.cwd() / "ouro-report.json"
 
-            with open("ouro-report.json", "w") as f:
+            with open("ouro-report.json", "w") as output_file:
                 logger.info(f"EXPORTING REPORT TO: {export_path}", highlight=True)
-                json.dump(cycles, f, indent=4)
+                json.dump(cycles, output_file, indent=4)
 
             logger.success(f"REPORT EXPORTED TO: {export_path}", highlight=True)
     else:

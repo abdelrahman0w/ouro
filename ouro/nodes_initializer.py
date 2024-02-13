@@ -2,6 +2,7 @@ import ast
 from pathlib import Path
 from typing import Dict
 from typing import List
+from typing import Set
 from typing import Tuple
 from typing import Union
 
@@ -11,34 +12,35 @@ from ouro.reader import Reader
 class Node:
     def __init__(
         self,
-        name: str,
+        file_path: Path,
     ) -> None:
-        self.name = name
-        self.imports: List[Tuple["Node", bool, int]] = []  # (node, is_from, lineno)
-        self.defs: List[Tuple[int, int]] = []
-
-    def add(self, item: "Node", is_from: bool, lineno: int) -> None:
-        self.imports.append((item, is_from, lineno))
+        self.file_path = file_path
+        self.imports: Set[Tuple["Node", bool, int]] = set()  # (node, is_from, lineno)
+        self.defs: Set[Tuple[int, int]] = set()  # (lineno, end_lineno)
 
 
 class NodesInitializer:
-    def __init__(self, reader_obj: "Reader") -> None:
-        self._prg_path = reader_obj.path
-        self._prj = reader_obj.read
-        self.nodes: Dict[str, "Node"] = {}
+    def __init__(self, path: str, ignore: Union[List[str], None] = None) -> None:
+        self.nodes: Dict[Path, "Node"] = {}
+
+        with Reader(path, ignore=ignore) as reader_obj:
+            self._files = reader_obj.files
+            self._prg_path = reader_obj.path
 
         self._initialize()
 
-    def _get_node(self, file: str) -> "Node":
-        if file not in self.nodes:
-            self.nodes[file] = Node(file)
+    def _get_node(self, file_path: Path) -> "Node":
+        if file_path not in self.nodes:
+            self.nodes[file_path] = Node(file_path)
 
-        return self.nodes[file]
+        return self.nodes[file_path]
 
-    def _get_imports(self, content: str) -> List[Union[ast.Import, ast.ImportFrom]]:
+    def _get_imports(
+        self, file_content: str
+    ) -> List[Union[ast.Import, ast.ImportFrom]]:
         return [
             node
-            for node in ast.walk(ast.parse(content))
+            for node in ast.walk(ast.parse(file_content))
             if isinstance(node, (ast.Import, ast.ImportFrom))
         ]
 
@@ -58,72 +60,76 @@ class NodesInitializer:
             )
         ]
 
-    def _get_module_path(
+    def _module_path_from_parent(
         self, node: Union[ast.ImportFrom, ast.Import]
-    ) -> Union[Tuple[str, str], None]:
+    ) -> Union[Path, None]:
         if isinstance(node, ast.Import):
             if not node.names:
                 return None
 
-            path = Path(
-                Path(self._prg_path) / Path(*(node.names[0].name.split(".")))
+            module_path = self._prg_path.parent / Path(
+                *(node.names[0].name.split("."))
             ).with_suffix(".py")
-            if not Path.exists(path):
-                path = Path(
-                    Path(self._prg_path).parent / Path(*(node.names[0].name.split(".")))
-                ).with_suffix(".py")
-
-            return (str(path), str(path))
         elif isinstance(node, ast.ImportFrom):
             if not node.module:
                 return None
 
-            path_1 = Path(
-                Path(self._prg_path) / Path(*(node.module.split(".")))
+            path_1 = self._prg_path.parent / Path(
+                *(node.module.split("."))
             ).with_suffix(".py")
-            if not Path.exists(path_1):
-                path_1 = Path(
-                    Path(self._prg_path).parent / Path(*(node.module.split(".")))
-                ).with_suffix(".py")
-
-            path_2 = Path(
-                Path(self._prg_path)
+            path_2 = (
+                self._prg_path.parent
                 / Path(*(node.module.split(".")))
-                / Path(node.names[0].name)
+                / Path(node.names[0].name).with_suffix(".py")
+            )
+            module_path = path_1 if path_1 and path_1.is_file() else path_2
+
+        return module_path if module_path and module_path.is_file() else None
+
+    def _get_module_path(
+        self, node: Union[ast.ImportFrom, ast.Import]
+    ) -> Union[Path, None]:
+        if isinstance(node, ast.Import):
+            if not node.names:
+                return None
+
+            module_path = self._prg_path / Path(
+                *(node.names[0].name.split("."))
             ).with_suffix(".py")
-            if not Path.exists(path_2):
-                path_2 = Path(
-                    Path(self._prg_path).parent
-                    / Path(*(node.module.split(".")))
-                    / Path(node.names[0].name)
-                ).with_suffix(".py")
+        elif isinstance(node, ast.ImportFrom):
+            if not node.module:
+                return None
 
-            return (str(path_1), str(path_2))
+            path_1 = self._prg_path / Path(*(node.module.split("."))).with_suffix(".py")
+            path_2 = (
+                self._prg_path
+                / Path(*(node.module.split(".")))
+                / Path(node.names[0].name).with_suffix(".py")
+            )
+            module_path = path_1 if path_1 and path_1.is_file() else path_2
 
-        return None
+        return module_path if module_path and module_path.is_file() else None
 
     def _initialize(self) -> None:
-        for file, content in self._prj:
-            node = self._get_node(file)
-            node.defs = [
-                (
+        for file_path, content in self._files:
+            node = self._get_node(file_path)
+            imports = self._get_imports(content)
+            defs = self._get_defs(content)
+
+            for def_ in defs:
+                node.defs.add(
                     (def_.lineno, def_.end_lineno)
                     if def_.end_lineno
                     else (def_.lineno, def_.lineno)
                 )
-                for def_ in self._get_defs(content)
-            ]
 
-            imports = self._get_imports(content)
-            for import_ in imports:
-                if imported_module_paths := self._get_module_path(import_):
-                    path_1, path_2 = imported_module_paths
-                    imported_node_1 = self._get_node(path_1)
-                    imported_node_2 = self._get_node(path_2)
+            for import_module in imports:
+                if imported_module_path := self._get_module_path(
+                    import_module
+                ) or self._module_path_from_parent(import_module):
+                    imported_node = self._get_node(imported_module_path)
 
-                    if isinstance(import_, ast.ImportFrom):
-                        node.add(imported_node_1, True, import_.lineno)
-                        node.add(imported_node_2, True, import_.lineno)
+                    if isinstance(import_module, ast.ImportFrom):
+                        node.imports.add((imported_node, True, import_module.lineno))
                     else:
-                        node.add(imported_node_1, False, import_.lineno)
-                        node.add(imported_node_2, False, import_.lineno)
+                        node.imports.add((imported_node, False, import_module.lineno))

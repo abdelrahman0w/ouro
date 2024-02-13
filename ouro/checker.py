@@ -6,7 +6,6 @@ from typing import Union
 from ouro.imports_graph import ImportsGraph
 from ouro.nodes_initializer import Node
 from ouro.nodes_initializer import NodesInitializer
-from ouro.reader import Reader
 
 
 class Checker:
@@ -16,9 +15,8 @@ class Checker:
         ignore: Union[List[str], None] = None,
         categorize: bool = True,
     ):
-        _reader = Reader(path, ignore)
-        _nodes = NodesInitializer(_reader).nodes
-        self.categorize = categorize
+        _nodes = NodesInitializer(path, ignore=ignore).nodes
+        self._categorize = categorize
         self._imports_graph = ImportsGraph(list(_nodes.values()))
         self._cycles: Dict = {}
 
@@ -30,15 +28,15 @@ class Checker:
         path: List["Node"],
         is_from: bool,
     ):
-        if not self._cycles.get(node.name):
-            self._cycles[node.name] = []
+        if not self._cycles.get(str(node.file_path)):
+            self._cycles[str(node.file_path)] = []
 
         in_def = any(def_begin <= lineno <= def_end for def_begin, def_end in node.defs)
-        path_from_import_to_file = [node.name for node in path]
+        path_from_import_to_file = [str(node.file_path) for node in path]
 
-        self._cycles[node.name].append(
+        self._cycles[str(node.file_path)].append(
             {
-                node_import.name: {
+                str(node_import.file_path): {
                     "lineno": lineno,
                     "in_def": in_def,
                     "is_from": is_from,
@@ -55,8 +53,8 @@ class Checker:
         path: List["Node"],
         is_from: bool,
     ):
-        if not self._cycles.get(node.name):
-            self._cycles[node.name] = {
+        if not self._cycles.get(str(node.file_path)):
+            self._cycles[str(node.file_path)] = {
                 "critical": [],
                 "import_from_in_def": [],
                 "direct_import": [],
@@ -64,7 +62,7 @@ class Checker:
             }
 
         in_def = any(def_begin <= lineno <= def_end for def_begin, def_end in node.defs)
-        path_from_import_to_file = [node.name for node in path]
+        path_from_import_to_file = [str(node.file_path) for node in path]
         categories_map = {
             "critical": (is_from and not in_def),
             "import_from_in_def": (is_from and in_def),
@@ -74,9 +72,9 @@ class Checker:
 
         for category, condition in categories_map.items():
             if condition:
-                self._cycles[node.name][category].append(
+                self._cycles[str(node.file_path)][category].append(
                     {
-                        node_import.name: {
+                        str(node_import.file_path): {
                             "lineno": lineno,
                             "in_def": in_def,
                             "is_from": is_from,
@@ -94,7 +92,7 @@ class Checker:
             if not is_cyclic:
                 continue
 
-            if self.categorize:
+            if self._categorize:
                 self._handle_node_cycle_categorize(
                     node, node_import, lineno, path, is_from
                 )
@@ -113,7 +111,7 @@ class Checker:
     def get_possible_origins(
         self, cycles: Dict, num_possibilities: int = 3
     ) -> List[str]:
-        if self.categorize:
+        if self._categorize:
             cycle_iter = (
                 cycle_info
                 for cycle in cycles.values()
