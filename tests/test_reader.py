@@ -9,7 +9,7 @@ def test_reader(mock_git_dir, mock_gitignore):
     assert Path.exists(test_pkg_dir / ".gitignore")
 
     with Reader(path=test_pkg_dir, ignore=["ignore*"]) as reader:
-        files_lst, content_lst = zip(*reader)
+        files_lst, content_lst = zip(*reader.files)
 
     assert len(files_lst) == 6
     assert len(content_lst) == 6

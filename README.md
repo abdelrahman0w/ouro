@@ -140,7 +140,7 @@ ouro [-h] [-v] [--verbose] [--no-categorize] [-e] [-i IGNORE [IGNORE ...]] [path
 
     ```yaml
     - repo: https://github.com/abdelrahman0w/ouro
-        rev: v0.1.3
+        rev: v0.2.0
         hooks:
         - id: ouro
     ```

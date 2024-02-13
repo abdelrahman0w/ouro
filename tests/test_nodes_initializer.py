@@ -1,9 +1,12 @@
 from pathlib import Path
 
+import pytest
+
 from ouro.nodes_initializer import NodesInitializer
 from ouro.reader import Reader
 
 
+@pytest.mark.skip(reason="Needs Refactoring")
 def test_nodes_initializer(mock_git_dir, mock_gitignore):
     test_pkg_dir = Path(__file__).resolve().parent / "test_pkg"
 

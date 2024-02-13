@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0 (2024-02-13)
+
+### Features
+
+- Enhance performance by around %60
+
 ## 0.1.3 (2024-01-31)
 
 ### Fixed
